@@ -1,8 +1,4 @@
 // Importez les modules Firebase nécessaires
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-database.js";
-
-// Configurer votre application Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyA8yeNUorIIlttsqEYISsGYYWojYt2rHtc",
   authDomain: "my-awesome-site-c48bb.firebaseapp.com",
@@ -12,28 +8,29 @@ const firebaseConfig = {
   appId: "1:859728588693:web:b7e90954682703fac9909c"
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
+// Initialisez votre application Firebase
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-// Récupérer une référence à la base de données
-const database = getDatabase(firebaseApp);
-const tweetsRef = ref(database, 'tweets');
+// Récupérez une référence à la base de données
+const database = firebase.database();
+const tweetsRef = database.ref('tweets');
 
 function sendTweet() {
   var pseudo = document.getElementById("pseudo").value;
   var content = document.getElementById("tweet-content").value;
 
   if (pseudo && content) {
-    // Envoyer le tweet à la base de données Firebase
-    push(tweetsRef, { pseudo: pseudo, content: content });
+    // Envoyez le tweet à la base de données Firebase
+    tweetsRef.push({ pseudo: pseudo, content: content });
 
-    // Clear input fields after tweeting
+    // Effacez les champs de saisie après le tweet
     document.getElementById("pseudo").value = "";
     document.getElementById("tweet-content").value = "";
   }
 }
 
-// Écouter les changements dans la base de données et mettre à jour l'affichage
-onValue(tweetsRef, (snapshot) => {
+// Écoutez les changements dans la base de données et mettez à jour l'affichage
+tweetsRef.on('value', (snapshot) => {
   var tweetList = document.getElementById("tweet-list");
   tweetList.innerHTML = '';
 
