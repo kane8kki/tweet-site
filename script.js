@@ -47,6 +47,10 @@ tweetsRef.on('value', (snapshot) => {
     tweetList.appendChild(tweetElement);
   });
 });
+// Importez les modules Firebase nécessaires
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-database.js";
+
   snapshot.forEach((childSnapshot) => {
     var tweet = childSnapshot.val();
     var tweetElement = document.createElement("div");
