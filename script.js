@@ -1,11 +1,11 @@
-// Configurez votre application Firebase
+// Importez les modules Firebase nécessaires
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA8yeNUorIIlttsqEYISsGYYWojYt2rHtc",
+  authDomain: "my-awesome-site-c48bb.firebaseapp.com",
+  projectId: "my-awesome-site-c48bb",
+  storageBucket: "my-awesome-site-c48bb.appspot.com",
+  messagingSenderId: "859728588693",
+  appId: "1:859728588693:web:b7e90954682703fac9909c"
 };
 
 // Initialisez votre application Firebase
