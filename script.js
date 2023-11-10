@@ -1,23 +1,19 @@
-// Importez les modules Firebase nécessaires
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-database.js";
-
-// Importez les modules Firebase nécessaires
+// Configurez votre application Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyA8yeNUorIIlttsqEYISsGYYWojYt2rHtc",
-  authDomain: "my-awesome-site-c48bb.firebaseapp.com",
-  projectId: "my-awesome-site-c48bb",
-  storageBucket: "my-awesome-site-c48bb.appspot.com",
-  messagingSenderId: "859728588693",
-  appId: "1:859728588693:web:b7e90954682703fac9909c"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
 // Initialisez votre application Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 // Récupérez une référence à la base de données
-const database = getDatabase(firebaseApp);
-const tweetsRef = ref(database, 'tweets');
+const database = firebase.database();
+const tweetsRef = database.ref('tweets');
 
 function sendTweet() {
   var pseudo = document.getElementById("pseudo").value;
@@ -28,7 +24,7 @@ function sendTweet() {
 
   if (pseudo && content) {
     // Envoyez le tweet à la base de données Firebase
-    push(tweetsRef, { pseudo: pseudo, content: content });
+    tweetsRef.push({ pseudo: pseudo, content: content });
 
     // Effacez les champs de saisie après le tweet
     document.getElementById("pseudo").value = "";
@@ -37,7 +33,7 @@ function sendTweet() {
 }
 
 // Écoutez les changements dans la base de données et mettez à jour l'affichage
-onValue(tweetsRef, (snapshot) => {
+tweetsRef.on('value', (snapshot) => {
   console.log("Snapshot:", snapshot.val());
   var tweetList = document.getElementById("tweet-list");
   tweetList.innerHTML = '';
