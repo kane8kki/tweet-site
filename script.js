@@ -19,6 +19,9 @@ function sendTweet() {
   var pseudo = document.getElementById("pseudo").value;
   var content = document.getElementById("tweet-content").value;
 
+  console.log("Pseudo:", pseudo);
+  console.log("Content:", content);
+
   if (pseudo && content) {
     // Envoyez le tweet à la base de données Firebase
     tweetsRef.push({ pseudo: pseudo, content: content });
@@ -31,9 +34,19 @@ function sendTweet() {
 
 // Écoutez les changements dans la base de données et mettez à jour l'affichage
 tweetsRef.on('value', (snapshot) => {
+  console.log("Snapshot:", snapshot.val());
   var tweetList = document.getElementById("tweet-list");
   tweetList.innerHTML = '';
 
+  snapshot.forEach((childSnapshot) => {
+    var tweet = childSnapshot.val();
+    var tweetElement = document.createElement("div");
+    tweetElement.className = "tweet";
+    tweetElement.innerHTML = `<strong>${tweet.pseudo}:</strong> ${tweet.content}`;
+
+    tweetList.appendChild(tweetElement);
+  });
+});
   snapshot.forEach((childSnapshot) => {
     var tweet = childSnapshot.val();
     var tweetElement = document.createElement("div");
