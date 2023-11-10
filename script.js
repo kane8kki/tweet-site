@@ -1,3 +1,21 @@
+function sendTweet() {
+  var pseudo = document.getElementById("pseudo").value;
+  var content = document.getElementById("tweet-content").value;
+
+  if (pseudo && content) {
+    var tweetList = document.getElementById("tweet-list");
+
+    var tweetElement = document.createElement("div");
+    tweetElement.className = "tweet";
+    tweetElement.innerHTML = `<strong>${pseudo}:</strong> ${content}`;
+
+    tweetList.appendChild(tweetElement);
+
+    // Clear input fields after tweeting
+    document.getElementById("pseudo").value = "";
+    document.getElementById("tweet-content").value = "";
+  }
+}
 // Importez les modules Firebase nécessaires
 const firebaseConfig = {
   apiKey: "AIzaSyA8yeNUorIIlttsqEYISsGYYWojYt2rHtc",
