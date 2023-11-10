@@ -1,21 +1,7 @@
-function sendTweet() {
-  var pseudo = document.getElementById("pseudo").value;
-  var content = document.getElementById("tweet-content").value;
+// Importez les modules Firebase nécessaires
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-database.js";
 
-  if (pseudo && content) {
-    var tweetList = document.getElementById("tweet-list");
-
-    var tweetElement = document.createElement("div");
-    tweetElement.className = "tweet";
-    tweetElement.innerHTML = `<strong>${pseudo}:</strong> ${content}`;
-
-    tweetList.appendChild(tweetElement);
-
-    // Clear input fields after tweeting
-    document.getElementById("pseudo").value = "";
-    document.getElementById("tweet-content").value = "";
-  }
-}
 // Importez les modules Firebase nécessaires
 const firebaseConfig = {
   apiKey: "AIzaSyA8yeNUorIIlttsqEYISsGYYWojYt2rHtc",
@@ -27,11 +13,11 @@ const firebaseConfig = {
 };
 
 // Initialisez votre application Firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
 
 // Récupérez une référence à la base de données
-const database = firebase.database();
-const tweetsRef = database.ref('tweets');
+const database = getDatabase(firebaseApp);
+const tweetsRef = ref(database, 'tweets');
 
 function sendTweet() {
   var pseudo = document.getElementById("pseudo").value;
@@ -42,7 +28,7 @@ function sendTweet() {
 
   if (pseudo && content) {
     // Envoyez le tweet à la base de données Firebase
-    tweetsRef.push({ pseudo: pseudo, content: content });
+    push(tweetsRef, { pseudo: pseudo, content: content });
 
     // Effacez les champs de saisie après le tweet
     document.getElementById("pseudo").value = "";
@@ -51,23 +37,10 @@ function sendTweet() {
 }
 
 // Écoutez les changements dans la base de données et mettez à jour l'affichage
-tweetsRef.on('value', (snapshot) => {
+onValue(tweetsRef, (snapshot) => {
   console.log("Snapshot:", snapshot.val());
   var tweetList = document.getElementById("tweet-list");
   tweetList.innerHTML = '';
-
-  snapshot.forEach((childSnapshot) => {
-    var tweet = childSnapshot.val();
-    var tweetElement = document.createElement("div");
-    tweetElement.className = "tweet";
-    tweetElement.innerHTML = `<strong>${tweet.pseudo}:</strong> ${tweet.content}`;
-
-    tweetList.appendChild(tweetElement);
-  });
-});
-// Importez les modules Firebase nécessaires
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-database.js";
 
   snapshot.forEach((childSnapshot) => {
     var tweet = childSnapshot.val();
