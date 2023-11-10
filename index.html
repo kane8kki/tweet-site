@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Twitter Anonyme</title>
+</head>
+<body>
+  <header>
+    <div class="ribbon">
+      <img src="logo.png" alt="Logo du site">
+    </div>
+  </header>
+  
+  <main>
+    <div class="tweet-box">
+      <input type="text" id="pseudo" placeholder="Pseudo">
+      <textarea id="tweet-content" placeholder="Quoi de neuf ?"></textarea>
+      <button onclick="sendTweet()">Tweeter</button>
+    </div>
+
+    <div id="tweet-list"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
