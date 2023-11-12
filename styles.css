@@ -13,10 +13,14 @@ header {
 .ribbon {
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center; /* Pour centrer le contenu horizontalement */
+  align-items: center; /* Pour centrer le contenu verticalement */
 }
 
 .ribbon img {
   max-width: 100%;
+  cursor: pointer;
 }
 
 main {
