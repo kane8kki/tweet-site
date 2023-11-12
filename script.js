@@ -1,3 +1,12 @@
+// ...
+
+// Ajoutez cette fonction pour rafraîchir la page lorsqu'on clique sur le logo
+function refreshPage() {
+  window.location.reload();
+}
+
+// ...
+
 function sendTweet() {
   var pseudo = document.getElementById("pseudo").value;
   var content = document.getElementById("tweet-content").value;
