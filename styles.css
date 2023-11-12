@@ -11,7 +11,7 @@ header {
 }
 
 .ribbon {
-  max-width: 1200px;
+  max-width: 120px;
   margin: 0 auto;
   display: flex;
   justify-content: center; /* Pour centrer le contenu horizontalement */
